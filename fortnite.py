@@ -4,8 +4,11 @@ import matplotlib.pyplot as plt
 import time
 def print_match(match):
     print("Match count: ", match['matches'], "\nKDA: ", round(match['kills']/match['matches'],2))
-
-r=requests.get("https://api.fortnitetracker.com/v1/profile/pc/squid111", headers={'TRN-Api-Key': 'b46c80e9-ee91-4aea-bc41-dc15f96f7c4a'})
+    time_info = match['dateCollected'].split("T")
+    print("Match date: ", time_info[0], "\nMatch time: ", time_info[1], "\n************")
+name = input("input name of user: ")
+url = "https://api.fortnitetracker.com/v1/profile/pc/" + name
+r=requests.get(url, headers={'TRN-Api-Key': 'b46c80e9-ee91-4aea-bc41-dc15f96f7c4a'})
 json_data = json.loads(r.text)
 prev_ids = []
 detected = False
